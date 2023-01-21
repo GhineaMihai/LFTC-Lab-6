@@ -1,0 +1,1301 @@
+Terminals unused in grammar
+
+    VOID
+    STATIC
+    READ
+    RETURN
+    STRING
+    CONTINUE
+    DO
+    ELSE
+    CH
+    ST
+    FL
+    SEP
+    OP
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: INT MAIN PAR_OPEN PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+
+    2 statementlist: statement ';'
+    3              | statement ';' statementlist
+
+    4 statement: declaration
+    5          | arraydeclaration
+    6          | simplestatement
+    7          | structstatement
+
+    8 declaration: type ID
+
+    9 type: primarytypes
+   10     | arraytypes
+
+   11 primarytypes: INT
+   12             | LONG
+   13             | FLOAT
+   14             | DOUBLE
+   15             | SHORT
+   16             | CHAR
+
+   17 arraytypes: primarytypes '[' NO ']'
+   18           | primarytypes '[' DIGIT ']'
+
+   19 arraydeclaration: type ID ATRIB CURLY_OPEN array CURLY_CLOSED
+
+   20 array: term ';'
+   21      | term ',' array
+
+   22 term: ID
+   23     | NC
+   24     | NO
+   25     | DIGIT
+
+   26 simplestatement: assignment
+   27                | outstatement
+
+   28 assignment: ID ATRIB expression
+
+   29 expression: NEG PAR_OPEN term PAR_CLOSED
+   30           | NEG PAR_OPEN term EQ term PAR_CLOSED
+   31           | term
+   32           | term EQ term
+   33           | NEG PAR_OPEN term LE term PAR_CLOSED
+   34           | term LE term
+   35           | NEG PAR_OPEN term GE term PAR_CLOSED
+   36           | term GE term
+   37           | NEG PAR_OPEN term AND term PAR_CLOSED
+   38           | term AND term
+   39           | NEG PAR_OPEN term OR term PAR_CLOSED
+   40           | term OR term
+   41           | NEG PAR_OPEN term DIF term PAR_CLOSED
+   42           | term DIF term
+   43           | NEG PAR_OPEN term L term PAR_CLOSED
+   44           | term L term
+   45           | NEG PAR_OPEN term G term PAR_CLOSED
+   46           | term G term
+
+   47 outstatement: PRINT PAR_OPEN ID PAR_CLOSED
+
+   48 structstatement: ifstatement
+   49                | whilestatement
+
+   50 ifstatement: IF PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+
+   51 whilestatement: WHILE PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+   52               | WHILE PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist BREAK ';' CURLY_CLOSED
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    ',' (44) 21
+    ';' (59) 2 3 20 52
+    '[' (91) 17 18
+    ']' (93) 17 18
+    error (256)
+    VOID (258)
+    WHILE (259) 51 52
+    STATIC (260)
+    SHORT (261) 15
+    READ (262)
+    RETURN (263)
+    INT (264) 1 11
+    MAIN (265) 1
+    STRING (266)
+    PRINT (267) 47
+    BREAK (268) 52
+    CHAR (269) 16
+    CONTINUE (270)
+    DO (271)
+    DOUBLE (272) 14
+    ELSE (273)
+    FLOAT (274) 13
+    IF (275) 50
+    LONG (276) 12
+    DIGIT (277) 18 25
+    NO (278) 17 24
+    NC (279) 23
+    CH (280)
+    ST (281)
+    ID (282) 8 19 22 28 47
+    FL (283)
+    SEP (284)
+    OP (285)
+    CURLY_OPEN (286) 1 19 50 51 52
+    CURLY_CLOSED (287) 1 19 50 51 52
+    PAR_OPEN (288) 1 29 30 33 35 37 39 41 43 45 47 50 51 52
+    PAR_CLOSED (289) 1 29 30 33 35 37 39 41 43 45 47 50 51 52
+    ATRIB (290) 19 28
+    NEG (291) 29 30 33 35 37 39 41 43 45
+    EQ (292) 30 32
+    LE (293) 33 34
+    GE (294) 35 36
+    AND (295) 37 38
+    OR (296) 39 40
+    DIF (297) 41 42
+    L (298) 43 44
+    G (299) 45 46
+
+
+Nonterminals, with rules where they appear
+
+    $accept (49)
+        on left: 0
+    program (50)
+        on left: 1
+        on right: 0
+    statementlist (51)
+        on left: 2 3
+        on right: 1 3 50 51 52
+    statement (52)
+        on left: 4 5 6 7
+        on right: 2 3
+    declaration (53)
+        on left: 8
+        on right: 4
+    type (54)
+        on left: 9 10
+        on right: 8 19
+    primarytypes (55)
+        on left: 11 12 13 14 15 16
+        on right: 9 17 18
+    arraytypes (56)
+        on left: 17 18
+        on right: 10
+    arraydeclaration (57)
+        on left: 19
+        on right: 5
+    array (58)
+        on left: 20 21
+        on right: 19 21
+    term (59)
+        on left: 22 23 24 25
+        on right: 20 21 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
+    simplestatement (60)
+        on left: 26 27
+        on right: 6
+    assignment (61)
+        on left: 28
+        on right: 26
+    expression (62)
+        on left: 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46
+        on right: 28 50 51 52
+    outstatement (63)
+        on left: 47
+        on right: 27
+    structstatement (64)
+        on left: 48 49
+        on right: 7
+    ifstatement (65)
+        on left: 50
+        on right: 48
+    whilestatement (66)
+        on left: 51 52
+        on right: 49
+
+
+State 0
+
+    0 $accept: • program $end
+
+    INT  shift, and go to state 1
+
+    program  go to state 2
+
+
+State 1
+
+    1 program: INT • MAIN PAR_OPEN PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+
+    MAIN  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: program • $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    1 program: INT MAIN • PAR_OPEN PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+
+    PAR_OPEN  shift, and go to state 5
+
+
+State 4
+
+    0 $accept: program $end •
+
+    $default  accept
+
+
+State 5
+
+    1 program: INT MAIN PAR_OPEN • PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+
+    PAR_CLOSED  shift, and go to state 6
+
+
+State 6
+
+    1 program: INT MAIN PAR_OPEN PAR_CLOSED • CURLY_OPEN statementlist CURLY_CLOSED
+
+    CURLY_OPEN  shift, and go to state 7
+
+
+State 7
+
+    1 program: INT MAIN PAR_OPEN PAR_CLOSED CURLY_OPEN • statementlist CURLY_CLOSED
+
+    WHILE   shift, and go to state 8
+    SHORT   shift, and go to state 9
+    INT     shift, and go to state 10
+    PRINT   shift, and go to state 11
+    CHAR    shift, and go to state 12
+    DOUBLE  shift, and go to state 13
+    FLOAT   shift, and go to state 14
+    IF      shift, and go to state 15
+    LONG    shift, and go to state 16
+    ID      shift, and go to state 17
+
+    statementlist     go to state 18
+    statement         go to state 19
+    declaration       go to state 20
+    type              go to state 21
+    primarytypes      go to state 22
+    arraytypes        go to state 23
+    arraydeclaration  go to state 24
+    simplestatement   go to state 25
+    assignment        go to state 26
+    outstatement      go to state 27
+    structstatement   go to state 28
+    ifstatement       go to state 29
+    whilestatement    go to state 30
+
+
+State 8
+
+   51 whilestatement: WHILE • PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+   52               | WHILE • PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist BREAK ';' CURLY_CLOSED
+
+    PAR_OPEN  shift, and go to state 31
+
+
+State 9
+
+   15 primarytypes: SHORT •
+
+    $default  reduce using rule 15 (primarytypes)
+
+
+State 10
+
+   11 primarytypes: INT •
+
+    $default  reduce using rule 11 (primarytypes)
+
+
+State 11
+
+   47 outstatement: PRINT • PAR_OPEN ID PAR_CLOSED
+
+    PAR_OPEN  shift, and go to state 32
+
+
+State 12
+
+   16 primarytypes: CHAR •
+
+    $default  reduce using rule 16 (primarytypes)
+
+
+State 13
+
+   14 primarytypes: DOUBLE •
+
+    $default  reduce using rule 14 (primarytypes)
+
+
+State 14
+
+   13 primarytypes: FLOAT •
+
+    $default  reduce using rule 13 (primarytypes)
+
+
+State 15
+
+   50 ifstatement: IF • PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+
+    PAR_OPEN  shift, and go to state 33
+
+
+State 16
+
+   12 primarytypes: LONG •
+
+    $default  reduce using rule 12 (primarytypes)
+
+
+State 17
+
+   28 assignment: ID • ATRIB expression
+
+    ATRIB  shift, and go to state 34
+
+
+State 18
+
+    1 program: INT MAIN PAR_OPEN PAR_CLOSED CURLY_OPEN statementlist • CURLY_CLOSED
+
+    CURLY_CLOSED  shift, and go to state 35
+
+
+State 19
+
+    2 statementlist: statement • ';'
+    3              | statement • ';' statementlist
+
+    ';'  shift, and go to state 36
+
+
+State 20
+
+    4 statement: declaration •
+
+    $default  reduce using rule 4 (statement)
+
+
+State 21
+
+    8 declaration: type • ID
+   19 arraydeclaration: type • ID ATRIB CURLY_OPEN array CURLY_CLOSED
+
+    ID  shift, and go to state 37
+
+
+State 22
+
+    9 type: primarytypes •
+   17 arraytypes: primarytypes • '[' NO ']'
+   18           | primarytypes • '[' DIGIT ']'
+
+    '['  shift, and go to state 38
+
+    $default  reduce using rule 9 (type)
+
+
+State 23
+
+   10 type: arraytypes •
+
+    $default  reduce using rule 10 (type)
+
+
+State 24
+
+    5 statement: arraydeclaration •
+
+    $default  reduce using rule 5 (statement)
+
+
+State 25
+
+    6 statement: simplestatement •
+
+    $default  reduce using rule 6 (statement)
+
+
+State 26
+
+   26 simplestatement: assignment •
+
+    $default  reduce using rule 26 (simplestatement)
+
+
+State 27
+
+   27 simplestatement: outstatement •
+
+    $default  reduce using rule 27 (simplestatement)
+
+
+State 28
+
+    7 statement: structstatement •
+
+    $default  reduce using rule 7 (statement)
+
+
+State 29
+
+   48 structstatement: ifstatement •
+
+    $default  reduce using rule 48 (structstatement)
+
+
+State 30
+
+   49 structstatement: whilestatement •
+
+    $default  reduce using rule 49 (structstatement)
+
+
+State 31
+
+   51 whilestatement: WHILE PAR_OPEN • expression PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+   52               | WHILE PAR_OPEN • expression PAR_CLOSED CURLY_OPEN statementlist BREAK ';' CURLY_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+    NEG    shift, and go to state 43
+
+    term        go to state 44
+    expression  go to state 45
+
+
+State 32
+
+   47 outstatement: PRINT PAR_OPEN • ID PAR_CLOSED
+
+    ID  shift, and go to state 46
+
+
+State 33
+
+   50 ifstatement: IF PAR_OPEN • expression PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+    NEG    shift, and go to state 43
+
+    term        go to state 44
+    expression  go to state 47
+
+
+State 34
+
+   28 assignment: ID ATRIB • expression
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+    NEG    shift, and go to state 43
+
+    term        go to state 44
+    expression  go to state 48
+
+
+State 35
+
+    1 program: INT MAIN PAR_OPEN PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED •
+
+    $default  reduce using rule 1 (program)
+
+
+State 36
+
+    2 statementlist: statement ';' •
+    3              | statement ';' • statementlist
+
+    WHILE   shift, and go to state 8
+    SHORT   shift, and go to state 9
+    INT     shift, and go to state 10
+    PRINT   shift, and go to state 11
+    CHAR    shift, and go to state 12
+    DOUBLE  shift, and go to state 13
+    FLOAT   shift, and go to state 14
+    IF      shift, and go to state 15
+    LONG    shift, and go to state 16
+    ID      shift, and go to state 17
+
+    $default  reduce using rule 2 (statementlist)
+
+    statementlist     go to state 49
+    statement         go to state 19
+    declaration       go to state 20
+    type              go to state 21
+    primarytypes      go to state 22
+    arraytypes        go to state 23
+    arraydeclaration  go to state 24
+    simplestatement   go to state 25
+    assignment        go to state 26
+    outstatement      go to state 27
+    structstatement   go to state 28
+    ifstatement       go to state 29
+    whilestatement    go to state 30
+
+
+State 37
+
+    8 declaration: type ID •
+   19 arraydeclaration: type ID • ATRIB CURLY_OPEN array CURLY_CLOSED
+
+    ATRIB  shift, and go to state 50
+
+    $default  reduce using rule 8 (declaration)
+
+
+State 38
+
+   17 arraytypes: primarytypes '[' • NO ']'
+   18           | primarytypes '[' • DIGIT ']'
+
+    DIGIT  shift, and go to state 51
+    NO     shift, and go to state 52
+
+
+State 39
+
+   25 term: DIGIT •
+
+    $default  reduce using rule 25 (term)
+
+
+State 40
+
+   24 term: NO •
+
+    $default  reduce using rule 24 (term)
+
+
+State 41
+
+   23 term: NC •
+
+    $default  reduce using rule 23 (term)
+
+
+State 42
+
+   22 term: ID •
+
+    $default  reduce using rule 22 (term)
+
+
+State 43
+
+   29 expression: NEG • PAR_OPEN term PAR_CLOSED
+   30           | NEG • PAR_OPEN term EQ term PAR_CLOSED
+   33           | NEG • PAR_OPEN term LE term PAR_CLOSED
+   35           | NEG • PAR_OPEN term GE term PAR_CLOSED
+   37           | NEG • PAR_OPEN term AND term PAR_CLOSED
+   39           | NEG • PAR_OPEN term OR term PAR_CLOSED
+   41           | NEG • PAR_OPEN term DIF term PAR_CLOSED
+   43           | NEG • PAR_OPEN term L term PAR_CLOSED
+   45           | NEG • PAR_OPEN term G term PAR_CLOSED
+
+    PAR_OPEN  shift, and go to state 53
+
+
+State 44
+
+   31 expression: term •
+   32           | term • EQ term
+   34           | term • LE term
+   36           | term • GE term
+   38           | term • AND term
+   40           | term • OR term
+   42           | term • DIF term
+   44           | term • L term
+   46           | term • G term
+
+    EQ   shift, and go to state 54
+    LE   shift, and go to state 55
+    GE   shift, and go to state 56
+    AND  shift, and go to state 57
+    OR   shift, and go to state 58
+    DIF  shift, and go to state 59
+    L    shift, and go to state 60
+    G    shift, and go to state 61
+
+    $default  reduce using rule 31 (expression)
+
+
+State 45
+
+   51 whilestatement: WHILE PAR_OPEN expression • PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+   52               | WHILE PAR_OPEN expression • PAR_CLOSED CURLY_OPEN statementlist BREAK ';' CURLY_CLOSED
+
+    PAR_CLOSED  shift, and go to state 62
+
+
+State 46
+
+   47 outstatement: PRINT PAR_OPEN ID • PAR_CLOSED
+
+    PAR_CLOSED  shift, and go to state 63
+
+
+State 47
+
+   50 ifstatement: IF PAR_OPEN expression • PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED
+
+    PAR_CLOSED  shift, and go to state 64
+
+
+State 48
+
+   28 assignment: ID ATRIB expression •
+
+    $default  reduce using rule 28 (assignment)
+
+
+State 49
+
+    3 statementlist: statement ';' statementlist •
+
+    $default  reduce using rule 3 (statementlist)
+
+
+State 50
+
+   19 arraydeclaration: type ID ATRIB • CURLY_OPEN array CURLY_CLOSED
+
+    CURLY_OPEN  shift, and go to state 65
+
+
+State 51
+
+   18 arraytypes: primarytypes '[' DIGIT • ']'
+
+    ']'  shift, and go to state 66
+
+
+State 52
+
+   17 arraytypes: primarytypes '[' NO • ']'
+
+    ']'  shift, and go to state 67
+
+
+State 53
+
+   29 expression: NEG PAR_OPEN • term PAR_CLOSED
+   30           | NEG PAR_OPEN • term EQ term PAR_CLOSED
+   33           | NEG PAR_OPEN • term LE term PAR_CLOSED
+   35           | NEG PAR_OPEN • term GE term PAR_CLOSED
+   37           | NEG PAR_OPEN • term AND term PAR_CLOSED
+   39           | NEG PAR_OPEN • term OR term PAR_CLOSED
+   41           | NEG PAR_OPEN • term DIF term PAR_CLOSED
+   43           | NEG PAR_OPEN • term L term PAR_CLOSED
+   45           | NEG PAR_OPEN • term G term PAR_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 68
+
+
+State 54
+
+   32 expression: term EQ • term
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 69
+
+
+State 55
+
+   34 expression: term LE • term
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 70
+
+
+State 56
+
+   36 expression: term GE • term
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 71
+
+
+State 57
+
+   38 expression: term AND • term
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 72
+
+
+State 58
+
+   40 expression: term OR • term
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 73
+
+
+State 59
+
+   42 expression: term DIF • term
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 74
+
+
+State 60
+
+   44 expression: term L • term
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 75
+
+
+State 61
+
+   46 expression: term G • term
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 76
+
+
+State 62
+
+   51 whilestatement: WHILE PAR_OPEN expression PAR_CLOSED • CURLY_OPEN statementlist CURLY_CLOSED
+   52               | WHILE PAR_OPEN expression PAR_CLOSED • CURLY_OPEN statementlist BREAK ';' CURLY_CLOSED
+
+    CURLY_OPEN  shift, and go to state 77
+
+
+State 63
+
+   47 outstatement: PRINT PAR_OPEN ID PAR_CLOSED •
+
+    $default  reduce using rule 47 (outstatement)
+
+
+State 64
+
+   50 ifstatement: IF PAR_OPEN expression PAR_CLOSED • CURLY_OPEN statementlist CURLY_CLOSED
+
+    CURLY_OPEN  shift, and go to state 78
+
+
+State 65
+
+   19 arraydeclaration: type ID ATRIB CURLY_OPEN • array CURLY_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    array  go to state 79
+    term   go to state 80
+
+
+State 66
+
+   18 arraytypes: primarytypes '[' DIGIT ']' •
+
+    $default  reduce using rule 18 (arraytypes)
+
+
+State 67
+
+   17 arraytypes: primarytypes '[' NO ']' •
+
+    $default  reduce using rule 17 (arraytypes)
+
+
+State 68
+
+   29 expression: NEG PAR_OPEN term • PAR_CLOSED
+   30           | NEG PAR_OPEN term • EQ term PAR_CLOSED
+   33           | NEG PAR_OPEN term • LE term PAR_CLOSED
+   35           | NEG PAR_OPEN term • GE term PAR_CLOSED
+   37           | NEG PAR_OPEN term • AND term PAR_CLOSED
+   39           | NEG PAR_OPEN term • OR term PAR_CLOSED
+   41           | NEG PAR_OPEN term • DIF term PAR_CLOSED
+   43           | NEG PAR_OPEN term • L term PAR_CLOSED
+   45           | NEG PAR_OPEN term • G term PAR_CLOSED
+
+    PAR_CLOSED  shift, and go to state 81
+    EQ          shift, and go to state 82
+    LE          shift, and go to state 83
+    GE          shift, and go to state 84
+    AND         shift, and go to state 85
+    OR          shift, and go to state 86
+    DIF         shift, and go to state 87
+    L           shift, and go to state 88
+    G           shift, and go to state 89
+
+
+State 69
+
+   32 expression: term EQ term •
+
+    $default  reduce using rule 32 (expression)
+
+
+State 70
+
+   34 expression: term LE term •
+
+    $default  reduce using rule 34 (expression)
+
+
+State 71
+
+   36 expression: term GE term •
+
+    $default  reduce using rule 36 (expression)
+
+
+State 72
+
+   38 expression: term AND term •
+
+    $default  reduce using rule 38 (expression)
+
+
+State 73
+
+   40 expression: term OR term •
+
+    $default  reduce using rule 40 (expression)
+
+
+State 74
+
+   42 expression: term DIF term •
+
+    $default  reduce using rule 42 (expression)
+
+
+State 75
+
+   44 expression: term L term •
+
+    $default  reduce using rule 44 (expression)
+
+
+State 76
+
+   46 expression: term G term •
+
+    $default  reduce using rule 46 (expression)
+
+
+State 77
+
+   51 whilestatement: WHILE PAR_OPEN expression PAR_CLOSED CURLY_OPEN • statementlist CURLY_CLOSED
+   52               | WHILE PAR_OPEN expression PAR_CLOSED CURLY_OPEN • statementlist BREAK ';' CURLY_CLOSED
+
+    WHILE   shift, and go to state 8
+    SHORT   shift, and go to state 9
+    INT     shift, and go to state 10
+    PRINT   shift, and go to state 11
+    CHAR    shift, and go to state 12
+    DOUBLE  shift, and go to state 13
+    FLOAT   shift, and go to state 14
+    IF      shift, and go to state 15
+    LONG    shift, and go to state 16
+    ID      shift, and go to state 17
+
+    statementlist     go to state 90
+    statement         go to state 19
+    declaration       go to state 20
+    type              go to state 21
+    primarytypes      go to state 22
+    arraytypes        go to state 23
+    arraydeclaration  go to state 24
+    simplestatement   go to state 25
+    assignment        go to state 26
+    outstatement      go to state 27
+    structstatement   go to state 28
+    ifstatement       go to state 29
+    whilestatement    go to state 30
+
+
+State 78
+
+   50 ifstatement: IF PAR_OPEN expression PAR_CLOSED CURLY_OPEN • statementlist CURLY_CLOSED
+
+    WHILE   shift, and go to state 8
+    SHORT   shift, and go to state 9
+    INT     shift, and go to state 10
+    PRINT   shift, and go to state 11
+    CHAR    shift, and go to state 12
+    DOUBLE  shift, and go to state 13
+    FLOAT   shift, and go to state 14
+    IF      shift, and go to state 15
+    LONG    shift, and go to state 16
+    ID      shift, and go to state 17
+
+    statementlist     go to state 91
+    statement         go to state 19
+    declaration       go to state 20
+    type              go to state 21
+    primarytypes      go to state 22
+    arraytypes        go to state 23
+    arraydeclaration  go to state 24
+    simplestatement   go to state 25
+    assignment        go to state 26
+    outstatement      go to state 27
+    structstatement   go to state 28
+    ifstatement       go to state 29
+    whilestatement    go to state 30
+
+
+State 79
+
+   19 arraydeclaration: type ID ATRIB CURLY_OPEN array • CURLY_CLOSED
+
+    CURLY_CLOSED  shift, and go to state 92
+
+
+State 80
+
+   20 array: term • ';'
+   21      | term • ',' array
+
+    ';'  shift, and go to state 93
+    ','  shift, and go to state 94
+
+
+State 81
+
+   29 expression: NEG PAR_OPEN term PAR_CLOSED •
+
+    $default  reduce using rule 29 (expression)
+
+
+State 82
+
+   30 expression: NEG PAR_OPEN term EQ • term PAR_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 95
+
+
+State 83
+
+   33 expression: NEG PAR_OPEN term LE • term PAR_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 96
+
+
+State 84
+
+   35 expression: NEG PAR_OPEN term GE • term PAR_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 97
+
+
+State 85
+
+   37 expression: NEG PAR_OPEN term AND • term PAR_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 98
+
+
+State 86
+
+   39 expression: NEG PAR_OPEN term OR • term PAR_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 99
+
+
+State 87
+
+   41 expression: NEG PAR_OPEN term DIF • term PAR_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 100
+
+
+State 88
+
+   43 expression: NEG PAR_OPEN term L • term PAR_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 101
+
+
+State 89
+
+   45 expression: NEG PAR_OPEN term G • term PAR_CLOSED
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    term  go to state 102
+
+
+State 90
+
+   51 whilestatement: WHILE PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist • CURLY_CLOSED
+   52               | WHILE PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist • BREAK ';' CURLY_CLOSED
+
+    BREAK         shift, and go to state 103
+    CURLY_CLOSED  shift, and go to state 104
+
+
+State 91
+
+   50 ifstatement: IF PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist • CURLY_CLOSED
+
+    CURLY_CLOSED  shift, and go to state 105
+
+
+State 92
+
+   19 arraydeclaration: type ID ATRIB CURLY_OPEN array CURLY_CLOSED •
+
+    $default  reduce using rule 19 (arraydeclaration)
+
+
+State 93
+
+   20 array: term ';' •
+
+    $default  reduce using rule 20 (array)
+
+
+State 94
+
+   21 array: term ',' • array
+
+    DIGIT  shift, and go to state 39
+    NO     shift, and go to state 40
+    NC     shift, and go to state 41
+    ID     shift, and go to state 42
+
+    array  go to state 106
+    term   go to state 80
+
+
+State 95
+
+   30 expression: NEG PAR_OPEN term EQ term • PAR_CLOSED
+
+    PAR_CLOSED  shift, and go to state 107
+
+
+State 96
+
+   33 expression: NEG PAR_OPEN term LE term • PAR_CLOSED
+
+    PAR_CLOSED  shift, and go to state 108
+
+
+State 97
+
+   35 expression: NEG PAR_OPEN term GE term • PAR_CLOSED
+
+    PAR_CLOSED  shift, and go to state 109
+
+
+State 98
+
+   37 expression: NEG PAR_OPEN term AND term • PAR_CLOSED
+
+    PAR_CLOSED  shift, and go to state 110
+
+
+State 99
+
+   39 expression: NEG PAR_OPEN term OR term • PAR_CLOSED
+
+    PAR_CLOSED  shift, and go to state 111
+
+
+State 100
+
+   41 expression: NEG PAR_OPEN term DIF term • PAR_CLOSED
+
+    PAR_CLOSED  shift, and go to state 112
+
+
+State 101
+
+   43 expression: NEG PAR_OPEN term L term • PAR_CLOSED
+
+    PAR_CLOSED  shift, and go to state 113
+
+
+State 102
+
+   45 expression: NEG PAR_OPEN term G term • PAR_CLOSED
+
+    PAR_CLOSED  shift, and go to state 114
+
+
+State 103
+
+   52 whilestatement: WHILE PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist BREAK • ';' CURLY_CLOSED
+
+    ';'  shift, and go to state 115
+
+
+State 104
+
+   51 whilestatement: WHILE PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED •
+
+    $default  reduce using rule 51 (whilestatement)
+
+
+State 105
+
+   50 ifstatement: IF PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist CURLY_CLOSED •
+
+    $default  reduce using rule 50 (ifstatement)
+
+
+State 106
+
+   21 array: term ',' array •
+
+    $default  reduce using rule 21 (array)
+
+
+State 107
+
+   30 expression: NEG PAR_OPEN term EQ term PAR_CLOSED •
+
+    $default  reduce using rule 30 (expression)
+
+
+State 108
+
+   33 expression: NEG PAR_OPEN term LE term PAR_CLOSED •
+
+    $default  reduce using rule 33 (expression)
+
+
+State 109
+
+   35 expression: NEG PAR_OPEN term GE term PAR_CLOSED •
+
+    $default  reduce using rule 35 (expression)
+
+
+State 110
+
+   37 expression: NEG PAR_OPEN term AND term PAR_CLOSED •
+
+    $default  reduce using rule 37 (expression)
+
+
+State 111
+
+   39 expression: NEG PAR_OPEN term OR term PAR_CLOSED •
+
+    $default  reduce using rule 39 (expression)
+
+
+State 112
+
+   41 expression: NEG PAR_OPEN term DIF term PAR_CLOSED •
+
+    $default  reduce using rule 41 (expression)
+
+
+State 113
+
+   43 expression: NEG PAR_OPEN term L term PAR_CLOSED •
+
+    $default  reduce using rule 43 (expression)
+
+
+State 114
+
+   45 expression: NEG PAR_OPEN term G term PAR_CLOSED •
+
+    $default  reduce using rule 45 (expression)
+
+
+State 115
+
+   52 whilestatement: WHILE PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist BREAK ';' • CURLY_CLOSED
+
+    CURLY_CLOSED  shift, and go to state 116
+
+
+State 116
+
+   52 whilestatement: WHILE PAR_OPEN expression PAR_CLOSED CURLY_OPEN statementlist BREAK ';' CURLY_CLOSED •
+
+    $default  reduce using rule 52 (whilestatement)

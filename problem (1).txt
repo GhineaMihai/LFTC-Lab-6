@@ -1,0 +1,36 @@
+int main ( )
+{
+int i ;
+i = 2 ;
+int k ;
+k = 10 ;
+while ( j < k )
+{	
+	int ok ;
+	ok = 0 ;
+	if ( i == 2 )
+	{
+		print ( i ) ;
+	};
+	if ( i <= 1 )
+	{
+		ok = 1 ;
+	};
+	if ( ok != 1 )
+	{
+	int a ;
+	a = 5 ;
+		while ( a <= i )
+			{
+				if ( a == 0 )
+				{
+					a = 5 ;
+				};
+			};
+			if ( a > i )
+			{
+				print ( i ) ;
+			};
+		};
+	};
+}
